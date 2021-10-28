@@ -1,14 +1,14 @@
 import React from "react";
 import {Tile} from "../tile/Tile"
 
-export const TileList = ({tiles}) => {
+export const TileList = ({ list }) => {
 
   return (
-    <div>
+    <div> 
         {
-          tiles.map((tile, index) => (
+          list.map((tile, index) => 
             <Tile key={index} tile={tile} />
-          ))
+          )
         }
     </div>
   );

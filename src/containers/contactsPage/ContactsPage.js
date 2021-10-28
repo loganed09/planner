@@ -32,18 +32,18 @@ export const ContactsPage = ({contacts, addContact}) => {
   */
 
   useEffect(() =>{
-    const result = contacts.find(contact => contact.name===name );
+    const result = contacts.find(contact => contact.name === name );
     if (result !== undefined) {
-      setDuplicate(false);
-    }else {
       setDuplicate(true);
     }
-  }, {name})
+  }, [name])
 
   return (
     <div>
       <section>
-        <h2>Add Contact</h2>
+        <h2>
+          Add Contact
+          {duplicate ? "Duplicate Name" : ""}</h2>
         <ContactForm 
           name={name} 
           phone={phone} 
@@ -56,7 +56,7 @@ export const ContactsPage = ({contacts, addContact}) => {
       <hr />
       <section>
         <h2>Contacts</h2>
-        <TileList tiles={contacts}/>
+        <TileList list={contacts}/>
       </section>
     </div>
   );
