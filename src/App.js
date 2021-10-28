@@ -5,40 +5,43 @@ import { AppointmentsPage } from "./containers/appointmentsPage/AppointmentsPage
 import { ContactsPage } from "./containers/contactsPage/ContactsPage";
 
 function App() {
-  /*
-  Define state variables for 
-  contacts and appointments 
-  */
-  const [contacts, setContacts] = useState([]);
-  const [appointments, setAppts] = useState([]);
   const ROUTES = {
     CONTACTS: "/contacts",
     APPOINTMENTS: "/appointments",
+  }; 
+
+  const [contacts, setContacts] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+
+  // const defaultContacts = [
+  //   {
+  //     name: 'Logan Edwards',
+  //     phone: '828-371-8274',
+  //     email: 'loganed09@gmail.com'
+  //   },
+  //   {
+  //     name: 'John Doe',
+  //     phone: '123-456-7890',
+  //     email: 'email123@gmail.com'
+  //   }
+  // ]
+
+  
+  const addContact = (name, phone, email) => {
+    setContacts([
+      ...contacts, 
+      {
+        name: name,
+        phone: phone,
+        email: email
+      },
+    ]);
   };
 
-  /*
-  Implement functions to add data to
-  contacts and appointments
-  */
-  // const addContact = (name, phoneNum, email) => {
-  //   setContacts([
-  //     ...contacts,
-  //     {
-  //       name: name,
-  //       phoneNum: phoneNum,
-  //       email: email
-  //     },
-  //   ]);
-  // };
-
-  const addContact = (name, phone, email) => {
-    setContacts((prev) => {
-      return [...prev, {name: name, phone: phone, email: email}];
-    });
-  }
+  
 
   const addAppointment = (title, contact, date, time) => {
-    setAppts([
+    setAppointments([
       ...appointments,
       {
         title: title,
@@ -63,11 +66,9 @@ function App() {
       <main>
         <Switch>
           <Route path={ROUTES.CONTACTS}>
-            {/* Add props to ContactsPage */}
-            <ContactsPage contacts={contacts} addContact={addContact}/>
+            <ContactsPage contacts={contacts} addContact={addContact} />
           </Route>
           <Route path={ROUTES.APPOINTMENTS}>
-            {/* Add props to AppointmentsPage */}
             <AppointmentsPage appointments={appointments} addAppointment={addAppointment} contacts={contacts} />
           </Route>
         </Switch>
