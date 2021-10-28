@@ -12,20 +12,6 @@ function App() {
 
   const [contacts, setContacts] = useState([]);
   const [appointments, setAppointments] = useState([]);
-
-  // const defaultContacts = [
-  //   {
-  //     name: 'Logan Edwards',
-  //     phone: '828-371-8274',
-  //     email: 'loganed09@gmail.com'
-  //   },
-  //   {
-  //     name: 'John Doe',
-  //     phone: '123-456-7890',
-  //     email: 'email123@gmail.com'
-  //   }
-  // ]
-
   
   const addContact = (name, phone, email) => {
     setContacts([

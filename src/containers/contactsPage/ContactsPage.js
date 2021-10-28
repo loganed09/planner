@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { ContactForm } from "../../components/contactForm/ContactForm";
-import {TileList} from '../../components/tileList/TileList';
+import {TileList} from '../../components/tileList/TileList'
 
-export const ContactsPage = (props) => {
+export const ContactsPage = ({contacts, addContact}) => {
+  /*
+  Define state variables for 
+  contact info and duplicate check
+  */
  const [name, setName] = useState("");
  const [phone, setPhone] = useState("");
  const [email, setEmail] = useState("");
@@ -10,48 +14,50 @@ export const ContactsPage = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    /*
+    Add contact info and clear data
+    if the contact name is not a duplicate
+    */
     if(!duplicate){
-      props.addContact(name, phone, email);
-      setName('');
-      setPhone('');
-      setEmail('');
+      addContact(name, phone, email);
+        setName('');
+        setPhone('');
+        setEmail('');
     }
   };
 
-  useEffect(() =>{
-    const foundDuplicate = () => {
-      const result = props.contacts.find((contact) => contact.name === name);
-      if (result !== undefined) {
-        return true;
-      }
-      return false;
-    };
+  /*
+  Using hooks, check for contact name in the 
+  contacts array variable in props
+  */
 
-    if (foundDuplicate()) {
+  useEffect(() =>{
+    const result = contacts.find(contact => contact.name === name );
+    if (result !== undefined) {
       setDuplicate(true);
-    }else {
-      setDuplicate(false);
     }
-  }, [name, props.contacts, duplicate]);
+  }, [name])
 
   return (
     <div>
       <section>
         <h2>
-          Add Contact</h2>
+          Add Contact
+          <br />
+          {duplicate ? "Duplicate Name" : ""}</h2>
         <ContactForm 
-          name={name}
-          setName={setName} 
-          phone={phone}
-          setPhone={setPhone} 
+          name={name} 
+          phone={phone} 
           email={email} 
           setEmail={setEmail} 
-          onSubmit={handleSubmit} />
+          setPhone={setPhone} 
+          setName={setName}
+          handleSubmit={handleSubmit} />
       </section>
       <hr />
       <section>
         <h2>Contacts</h2>
-        <TileList tiles={props.contacts}/>
+        <TileList tiles={contacts}/>
       </section>
     </div>
   );

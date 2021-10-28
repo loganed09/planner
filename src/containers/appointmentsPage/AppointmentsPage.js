@@ -39,12 +39,12 @@ export const AppointmentsPage = ({appointments, contacts, addAppointment}) => {
           setContact={setContact}
           setDate={setDate}
           setTime={setTime}
-          onSubmit={handleSubmit} />
+          handleSubmit={handleSubmit} />
       </section>
       <hr />
       <section>
         <h2>Appointments</h2>
-        <TileList list={appointments} />
+        <TileList tiles={appointments} />
       </section>
     </div>
   );

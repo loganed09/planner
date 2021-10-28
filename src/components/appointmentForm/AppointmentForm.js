@@ -33,12 +33,14 @@ export const AppointmentForm = ({
         contacts={contacts}
         setContact={setContact} />
       <input 
+        type="Date"
         value={date}
         name="date"
         min={getTodayString()}
         onChange={(e) => setDate(e.target.value)} 
-        placeholder="Contact List" />
+        placeholder="Date" />
       <input 
+        type="time"
         value={time}
         name="time"
         onChange={(e) => setTime(e.target.value) }
